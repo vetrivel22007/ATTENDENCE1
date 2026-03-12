@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📋 Attendance Management System</h1>
+            <p class="date-display" id="dateDisplay"></p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="attendance">Mark Attendance</button>
+            <button class="tab-btn" data-tab="students">Manage Students</button>
+            <button class="tab-btn" data-tab="reports">Reports</button>
+        </nav>
+
+        <!-- Dashboard Tab -->
+        <section id="dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3>Total Students</h3>
+                    <p class="stat-number" id="totalStudents">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Present Today</h3>
+                    <p class="stat-number present" id="presentToday">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Absent Today</h3>
+                    <p class="stat-number absent" id="absentToday">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Attendance Rate</h3>
+                    <p class="stat-number" id="attendanceRate">0%</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>Attendance Statistics</h3>
+                <div id="chartContainer" class="chart"></div>
+            </div>
+        </section>
+
+        <!-- Mark Attendance Tab -->
+        <section id="attendance" class="tab-content">
+            <div class="attendance-section">
+                <h2>Mark Attendance</h2>
+                <div class="date-selector">
+                    <label for="attendanceDate">Select Date:</label>
+                    <input type="date" id="attendanceDate">
+                </div>
+
+                <div class="attendance-list">
+                    <table id="attendanceTable">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll No</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTableBody">
+                        </tbody>
+                    </table>
+                    <p id="noStudentsMsg" class="no-data">No students found. Add students first.</p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-success" onclick="markAllPresent()">Mark All Present</button>
+                    <button class="btn btn-danger" onclick="markAllAbsent()">Mark All Absent</button>
+                    <button class="btn btn-primary" onclick="saveAttendance()">Save Attendance</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage Students Tab -->
+        <section id="students" class="tab-content">
+            <div class="students-section">
+                <h2>Manage Students</h2>
+                <div class="add-student-form">
+                    <input type="text" id="studentName" placeholder="Enter student name" required>
+                    <input type="text" id="rollNo" placeholder="Enter roll number" required>
+                    <button class="btn btn-primary" onclick="addStudent()">Add Student</button>
+                </div>
+
+                <div class="students-list">
+                    <table id="studentsTable">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll No</th>
+                                <th>Date Added</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                        </tbody>
+                    </table>
+                    <p id="noStudentsListMsg" class="no-data">No students added yet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Tab -->
+        <section id="reports" class="tab-content">
+            <div class="reports-section">
+                <h2>Attendance Reports</h2>
+                
+                <div class="report-filters">
+                    <label for="reportStudent">Select Student:</label>
+                    <select id="reportStudent">
+                        <option value="">All Students</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                    <button class="btn btn-secondary" onclick="exportReportCSV()">Export as CSV</button>
+                </div>
+
+                <div class="report-content">
+                    <table id="reportTable">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll No</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportTableBody">
+                        </tbody>
+                    </table>
+                    <p id="noReportDataMsg" class="no-data">No attendance records found.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Mock notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
